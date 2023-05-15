@@ -1,0 +1,35 @@
+{
+  "name": "shardeum-punks",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . && prettier . --check && npm run typecheck",
+    "format": "prettier . --write && eslint . --fix"
+  },
+  "dependencies": {
+    "@ethersproject/abi": "^5.7.0",
+    "@metamask/detect-provider": "^2.0.0",
+    "animejs": "^3.2.1",
+    "ethers": "^5.4.4",
+    "npm": "^9.6.0",
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "autoprefixer": "^10.4.13",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vue": "^9.9.0",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7",
+    "vite": "^4.0.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "CONTRACT_ADDRESS": "0x573Ef77E73fd2CaEcA7438a14b8c05FC5F635873",
+  "SCAN_LINK": "https://mumbai.polygonscan.com/tx/",
+  "NETWORK": {
+    "NAME": "Mumbai",
+    "SYMBOL": "MATIC",
+    "ID": 80001,
+    "HID": "0x13881",
+    "URL": "https://polygon-mumbai.infura.io/v3/4458cf4d1689497b9a38b1d6bbf05e78"
+  },
+  "NFT_NAME": "Polygon Punks",
+  "SYMBOL": "MATIC",
+  "WEI_COST": 75000000000000000,
+  "GAS_LIMIT": 300000,
+  "MARKETPLACE": "Opensea",
+  "MARKETPLACE_LINK": "https://testnets.opensea.io/fr/assets/mumbai/0x573ef77e73fd2caeca7438a14b8c05fc5f635873/"
+}
