@@ -168,18 +168,20 @@ export default {
           value: totalCostWei,
         })
         .then(async (tx) => {
-          info(`Transaction processing ! Check it on explorer: `, false, `${config.SCAN_LINK}/${tx.hash}`, "here")
+          info(`Transaction processing ! Check it on explorer: `, false, `${config.SCAN_LINK}${tx.hash}`, "here")
           const provider = new ethers.providers.Web3Provider(this.eth)
           const receipt = await provider.waitForTransaction(tx.hash);
           if(receipt.status === 1) {
             const nftNBR = parseInt(this.Csupply) + 1
             info(`Congratulations your NFT has been minted ! check it on marketplace`, false, `${config.MARKETPLACE_LINK}${nftNBR}`, "here")
+            this.Csupply = await contract.totalSupply();
             return
           }
           info(`Oops the transaction has been canceled, something went wrong`, true)
         })
         .catch(error => {
-          info(error.message, true);
+          if (error.code === 'ACTION_REJECTED') info('user denied transaction', true);
+          return
         });
 
     },
@@ -220,7 +222,7 @@ export default {
           if (err.code === 4001) {
             info('Please connect to MetaMask.', true);
           } else {
-            console.log(err);
+            info(err.message, true);
           }
         });
 

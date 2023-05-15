@@ -10,16 +10,19 @@
     >
       <a
         class="cursor-pointer hover:text-slate-200"
+        target="_blank"
         href="https://twitter.com/ShardeumPunks"
         >Twitter</a
       >
       <a
         class="cursor-pointer hover:text-slate-200"
+        target="_blank"
         href="https://discord.com/invite/zFrzvSggnS"
         >Discord</a
       >
       <a
         class="cursor-pointer hover:text-slate-200"
+        target="_blank"
         href="https://crew3.xyz/c/shardeumpunks/questboard?invitationId=WL9c6nnUmO4CaPP2ATmXD"
         >Crew3</a
       >
