@@ -1,7 +1,7 @@
 <template>
   <Header @login="login()"></Header>
   <Paused v-if="paused"></Paused>
-  <div v-else class="w-full h-screen bg flex justify-center items-center text-slate-100 px-5">
+  <!-- <div class="w-full h-screen bg flex justify-center items-center text-slate-100 px-5">
     <img :src="bg" class="hidden lg:block md:rounded-full h-[40vh] w-[40vh]" />
     <div class="space-y-28 mt-10">
       <div class="space-y-3 flex flex-col justify-center items-center">
@@ -37,7 +37,89 @@
       </div>
     </div>
     <img :src="bg" alt="" class="hidden lg:block rounded-full h-[40vh] w-[40vh]" />
-  </div>
+  </div> -->
+
+  <section class="page-background w-full h-screen bg flex justify-center items-center text-slate-100 px-5">
+    <div class="container flex justify-center py-24">
+      <div class="w-full md:w-3/4 lg:w-1/2 bg-black py-10 px-8 text-center text-white rounded-2xl border-gradient">
+        <img src="../assets/ehdk-card.gif" class="mx-auto rounded-2xl" width="350" height="350" />
+        <h1 ref="header" class="text-white text-4xl lg:text-6xl font-semibold mt-10">
+          Founders Pass
+        </h1>
+        <p class="text-white mt-4 mb-2 text-xl">
+          <span class="accent-color">There are {{ Csupply }}/{{ Tsupply }} Passes minted</span>
+        </p>
+        <p class="text-xl">
+          <span class="text-primary">5</span>
+          Per wallet
+        </p>
+        <h2 class="text-4xl text-primary font-semibold mt-8 mb-2">Public Mint</h2>
+        <p class="text-xl mb-5">0.05 ETH each</p>
+        
+        <div class="mpr space-y-10 flex justify-center items-center flex-col text-2xl">
+          <div class="flex justify-center items-center">
+            <button class="px-4 bg-pink-800 rounded-full align font-bold" @click="decrement">
+              -
+            </button>
+            <input class="w-20 bg-transparent items-center text-center" v-model="amount" />
+            <button class="px-4 bg-violet-800 rounded-full align-middle font-bold" @click="increment">
+              +
+            </button>
+          </div>
+          <p>{{ totalCost }} {{ config.NETWORK.SYMBOL }}</p>
+
+          <div class="flex space-x-5 pg">
+            <button
+              class="py-3 px-12 text-3xl rounded-md bg-gradient-to-br from-pink-800 to-violet-800 transition-all hover:bg-gradient-to-tl hover:text-4xl"
+              @click="mint">
+              MINT
+            </button>
+          </div>
+          <div class="w-[30%] flex justify-center text-center">
+            <p v-if="message" class="fixed text-2xl" :class="messageColor">{{ message }}
+              <a class="text-blue-600 underline" target="_blank" :href="link">{{ linkMessage }}</a>
+            </p>
+          </div>
+        </div>
+        <!-- <div class="flex justify-center space-x-10 mt-8">
+              <div class="flex justify-center items-center">
+                <button @click="decrement" class="w-6 text-center">
+                  <MinusIcon class="h-6" /></button
+                ><input
+                  class="light-gray text-center w-24 text-2xl"
+                  type="number"
+                  v-model="quantity"
+                />
+                <button @click="increment" class="w-6 text-center">
+                  <PlusIcon class="h-6" />
+                </button>
+              </div>
+              <div>
+                <button class="button px-10 py-2 rounded-full">Mint</button>
+              </div>
+            </div> -->
+      </div>
+    </div>
+  </section>
+  <section class="light-gray py-10">
+    <div class="container">
+      <img src="../assets/logo.png" alt="EDKH Labs logo" class="mx-auto" />
+      <div class="flex flex-wrap justify-between mt-16">
+        <p class="text-sm">
+          Contact Now:
+          <a href="mailto:info@islandjusticeleague.com" class="hover:underline">info@islandjusticeleague.com</a>
+        </p>
+        <p class="text-sm">Terms and Conditions</p>
+      </div>
+    </div>
+    <div class="container mt-8 text-center">
+      <div class="lighter-gray w-full md:w-3/4 mx-auto py-4 opacity-30">
+        <p class="text-sm text-white">
+          &copy; {{ currentYear }} Island Justice League. Labs All Rights Reserved
+        </p>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script setup>
@@ -46,8 +128,8 @@ import { fade_up } from '../core';
 
 const header = ref()
 
-const animations = [ 
-fade_up(header, 800)
+const animations = [
+  fade_up(header, 800)
 ]
 
 onMounted(() => {
@@ -133,7 +215,7 @@ export default {
       this.totalCostWei = String(config.WEI_COST * this.amount);
       this.totalGasLimit = String(config.GAS_LIMIT * this.amount);
       this.totalCost = (this.totalCostWei * Math.pow(10, -16)) / 100;
-    },             
+    },
 
     info(text, error, link = undefined, linkMessage = undefined) {
       this.message = text
@@ -171,7 +253,7 @@ export default {
           info(`Transaction processing ! Check it on explorer: `, false, `${config.SCAN_LINK}${tx.hash}`, "here")
           const provider = new ethers.providers.Web3Provider(this.eth)
           const receipt = await provider.waitForTransaction(tx.hash);
-          if(receipt.status === 1) {
+          if (receipt.status === 1) {
             const nftNBR = parseInt(this.Csupply) + 1
             info(`Congratulations your NFT has been minted ! check it on marketplace`, false, `${config.MARKETPLACE_LINK}${nftNBR}`, "here")
             this.Csupply = await contract.totalSupply();
@@ -270,7 +352,7 @@ export default {
           params: [{ chainId: HID }],
         }).then(() => window.location.reload())
           .catch((err) => {
-            if(err.code === 4902) {
+            if (err.code === 4902) {
               this.addNetwork();
               info(`Please add ${NAME} network.`, true)
               return
@@ -282,3 +364,33 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.page-background {
+  background-image: linear-gradient(180deg, #000000 0%, #f2295b00 42%),
+    url(../assets/home-background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.border-gradient {
+  background: linear-gradient(#1a1b1d, #1a1b1d) padding-box,
+    linear-gradient(to top, #a39794, #682809) border-box;
+  border: 4px solid transparent;
+}
+.button {
+  background-image: linear-gradient(230deg, #b8541b 0%, #11c2e3cc 100%);
+}
+p {
+  color: #c6c0c0;
+}
+.accent-color {
+  color: #bbb18f;
+}
+.light-gray {
+  background-color: #1a1b1d;
+}
+.lighter-gray {
+  background-color: #2F323C;
+}
+</style>
